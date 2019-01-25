@@ -1,0 +1,147 @@
+{
+    "path_traversal": {
+        "confidence": "high",
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_path_traversal",
+        "information": "This can be used by an attacker to read any file on the filesystem. To fix it, put the path string through a validator named 'isValidPath' which validates the input before it reaches the File class.",
+        "safety_methods": [
+            "isValidPath"
+        ],
+        "short_description": "Files and folders on the filesystem are reacheable to an external attacker.",
+        "opportunity_description": "Fix path traversal",
+        "severity": "high",
+        "opportunity_suggested_action_template": "Fix this path traversal. ##suggestion##.\n##content##"
+    },
+    "weak_hashing_method": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_weak_hashing_method",
+        "opportunity_description": "Use a safe hashing method",
+        "short_description": "Original strings can be retrieved from the hash!",
+        "severity": "medium",
+        "is_vuln": false,
+        "information": "The correct hashing method heavily depends on its usage. Please contact websec@mercadolibre.com to discuss the use case.",
+        "opportunity_suggested_action_template": "Fix the weak hashing method. ##suggestion##.\n##content##"
+    },
+    "default_mappings": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_default_mappings",
+        "opportunity_description": "Choose which controllers should be available in your application",
+        "information": "Using the default mappings means _every_ controller in your application is public and accesible for an attacker. Choose only those you wish to expose.",
+        "short_description": "Default mappings make every controller public!",
+        "severity": "medium",
+        "is_vuln": false,
+        "opportunity_suggested_action_template": "Refactor the default mappings. ##suggestion##.\n##content##"
+    },
+    "mass_assignment": {
+        "confidence": "high",
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "avoid_creating_objects_from_all_params",
+        "information": "This can be used by an attacker to set fields on the object, including private or protected ones.",
+        "safety_methods": [],
+        "opportunity_description": "Avoid creating objects from user supplied data!",
+        "short_description": "Mass assignment may lead to private field being set by an attacker",
+        "severity": "low",
+        "is_vuln": false,
+        "opportunity_suggested_action_template": "Avoid creating objects from the whole params hashmap. Only pass specific parameters or whitelist them outside of the class constructor. ##suggestion##.\n##content##"
+    },
+    "sql_injection": {
+        "confidence": "medium",
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_sql_injection",
+        "information": "It can be used by an attacker to execute arbitrary commands on the SQL DB. Use prepared statements to avoid this!",
+        "short_description": "An attacker can execute arbitrary SQL commands!",
+        "safety_methods": [],
+        "opportunity_description": "Fix SQL Injection!",
+        "severity": "high",
+        "is_vuln": true,
+        "opportunity_suggested_action_template": "Fix the SQL Injection. ##suggestion##.\n##content##"
+    },
+    "remote_code_execution": {
+        "confidence": "high",
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_remote_code_execution",
+        "information": "It can be used by an attacker to execute arbitrary commands on the server! Avoid using .exec methods which interpret shell commands!",
+        "opportunity_description": "Fix Remote Code Execution",
+        "short_description": "An attacker can execute arbitrary code on your instance!",
+        "severity": "high",
+        "is_vuln": true,
+        "opportunity_suggested_action_template": "Fix the remote code execution. ##suggestion##.\n##content##"
+    },
+    "reflected_xss": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_reflected_xss",
+        "opportunity_description": "Reflected XSS",
+        "information": "XSS leads to code from an attacker to be executed on the client! To fix it, set the encondig  configuration on grails to 'html'",
+        "short_description": "Leads to arbitrary Javascript execution on a victim's browser!",
+        "severity": "high",
+        "is_vuln": true,
+        "opportunity_suggested_action_template": "Fix this Cross-Site Scripting. ##suggestion##.\n##content##"
+    },
+    "open_redirect": {
+        "confidence": "high",
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_open_redirect",
+        "information": "Open redirects aid phising by redirect the user to a website from a trusted URL. Pass the URL you're redirecting to through a validator method with the name of isValidURL",
+        "safety_methods": [
+            "isValidURL"
+        ],
+        "opportunity_description": "Fix open redirects to deter phishing attempts",
+        "short_description": "A redirect URL can be controlled by an attacker!",
+        "severity": "medium",
+        "is_vuln": true,
+        "opportunity_suggested_action_template": "Fix open redirect. ##suggestion##.\n##content##"
+    },
+    "bad_encoding_vuln": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_bad_encoding",
+        "opportunity_description": "Insecure encoding on GSP",
+        "information": "DO NOT use any kind of 'raw' enconding on the GSP files. These encodings override configs and make the application vulnerable to XSS if an user-controled value is encoded. ",
+        "short_description": "Insecure encodings make the application vulnerable to XSS",
+        "severity": "low",
+        "is_vuln": false,
+        "opportunity_suggested_action_template": "Fix the bad encoding. ##suggestion##.\n##content##"
+    },
+    "default_encoding_set_to_none": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "set_safe_default_encoding",
+        "information": "Not having the 'html' codec makes all the rendering in the application vulnerable to XSS. Please change it to 'html'",
+        "short_description": "Makes the whole application insecure to XSS",
+        "opportunity_description": "Insecure default encoding",
+        "severity": "high",
+        "is_vuln": false,
+        "opportunity_suggested_action_template": "Fix the unsafe default encoding found. ##suggestion##.\n##content##"
+    },
+    "xml_external_entities_attack": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_xml_external_entities_attack",
+        "information": "The default XML Slurper has a serious vulnerability which allows injections. Please use this method with your parser `yourSlurper.setFeature(\"http://xml.org/sax/features/external-general-entities\", false)` to avoid this",
+        "short_description": "XML Slurper is vulnerable to injections by default",
+        "opportunity_description": "Make your XML Slurper secure",
+        "severity": "high",
+        "is_vuln": true,
+        "confidence": "high",
+        "opportunity_suggested_action_template": "Make the Slurper secure. ##suggestion##.\n##content##"
+    },
+    "harcoded_credentials": {
+        "feedback_recipient": "websec_opportunities@mercadolibre.com",
+        "opportunity_name": "fix_hardcoded_credentials",
+        "information": "They are a serious problem if the code leaks. Please use whatever method you can to take them out of the codebase. If you can't, please contact websec@mercadolibre.com",
+        "short_description": "If the code leaks, the account is compromised",
+        "opportunity_description": "Delete hardcoded credentials",
+        "severity": "low",
+        "is_vuln": false,
+        "confidence": "high",
+        "opportunity_suggested_action_template": "Try to delete the hardcoded credentials. ##suggestion##.\n##content##"
+    },
+    "new_vuln": {
+        "confidence": "medium",
+        "short_description": "New Vuln Short Description",
+        "opportunity_name": "new_vuln_opportunity_name",
+        "severity": "medium",
+        "is_vuln": true,
+        "opportunity_suggested_action_template": "New Vuln Opportunity Suggested Action",
+        "information": "New vuln information",
+        "opportunity_description": "New Vuln Description",
+        "feedback_recipient": "websec@mercadolibre.com"
+    }
+}

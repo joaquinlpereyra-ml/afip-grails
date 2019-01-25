@@ -1,0 +1,108 @@
+{
+    "path_traversal": {
+        "confidence": "high",
+        "information": "This can be used by an attacker to read any file on the filesystem. To fix it, put the path string through a validator named 'isValidPath' which validates the input before it reaches the File class.",
+        "safety_methods": [
+            "isValidPath"
+        ],
+        "short_description": "Files and folders on the filesystem are reacheable to an external attacker.",
+        "severity": "high",
+    },
+    "weak_hashing_method": {
+        "short_description": "Original strings can be retrieved from the hash!",
+        "severity": "medium",
+        "is_vuln": false,
+        "information": "The correct hashing method heavily depends on its usage. Please contact websec@mercadolibre.com to discuss the use case.",
+    },
+    "default_mappings": {
+        "information": "Using the default mappings means _every_ controller in your application is public and accesible for an attacker. Choose only those you wish to expose.",
+        "short_description": "Default mappings make every controller public!",
+        "severity": "medium",
+        "is_vuln": false,
+    },
+    "mass_assignment": {
+        "confidence": "high",
+        "information": "This can be used by an attacker to set fields on the object, including private or protected ones.",
+        "safety_methods": [],
+        "short_description": "Mass assignment may lead to private field being set by an attacker",
+        "severity": "low",
+        "is_vuln": false,
+    },
+    "sql_injection": {
+        "confidence": "medium",
+        "information": "It can be used by an attacker to execute arbitrary commands on the SQL DB. Use prepared statements to avoid this!",
+        "short_description": "An attacker can execute arbitrary SQL commands!",
+        "safety_methods": [],
+        "severity": "high",
+        "is_vuln": true,
+    },
+    "remote_code_execution": {
+        "confidence": "high",
+        "information": "It can be used by an attacker to execute arbitrary commands on the server! Avoid using .exec methods which interpret shell commands!",
+        "short_description": "An attacker can execute arbitrary code on your instance!",
+        "severity": "high",
+        "is_vuln": true,
+    },
+    "reflected_xss": {
+        "information": "XSS leads to code from an attacker to be executed on the client! To fix it, set the encondig  configuration on grails to 'html'",
+        "short_description": "Leads to arbitrary Javascript execution on a victim's browser!",
+        "severity": "high",
+        "is_vuln": true,
+    },
+    "open_redirect": {
+        "confidence": "high",
+        "information": "Open redirects aid phising by redirect the user to a website from a trusted URL. Pass the URL you're redirecting to through a validator method with the name of isValidURL",
+        "safety_methods": [
+            "isValidURL"
+        ],
+        "short_description": "A redirect URL can be controlled by an attacker!",
+        "severity": "medium",
+        "is_vuln": true,
+    },
+    "bad_encoding_vuln": {
+        "information": "DO NOT use any kind of 'raw' enconding on the GSP files. These encodings override configs and make the application vulnerable to XSS if an user-controled value is encoded. ",
+        "short_description": "Insecure encodings make the application vulnerable to XSS",
+        "severity": "low",
+        "is_vuln": false,
+    },
+    "unsafe_loading_of_static_resources": {
+        "information": "Loading via HTTP can lead to a number of vulnerabilities, including a Man In The Middle attack. Load everything via HTTPS",
+        "short_description": "You should use HTTPS for everything",
+        "severity": "medium",
+        "is_vuln": false,
+    },
+    "default_encoding_set_to_none": {
+        "information": "Not having the 'html' codec makes all the rendering in the application vulnerable to XSS. Please change it to 'html'",
+        "short_description": "Makes the whole application insecure to XSS",
+        "severity": "high",
+        "is_vuln": false,
+    },
+    "xml_external_entities_attack": {
+        "information": "The default XML Slurper has a serious vulnerability which allows injections. Please use this method with your parser `yourSlurper.setFeature(\"http://xml.org/sax/features/external-general-entities\", false)` to avoid this",
+        "short_description": "XML Slurper is vulnerable to injections by default",
+        "severity": "high",
+        "is_vuln": true,
+        "confidence": "high",
+    },
+    "harcoded_credentials": {
+        "information": "They are a serious problem if the code leaks. Please use whatever method you can to take them out of the codebase.",
+        "short_description": "If the code leaks, the account is compromised",
+        "severity": "low",
+        "is_vuln": false,
+        "confidence": "high",
+    },
+    "hardcoded_admin_token": {
+        "information": "It's a serious problem if the code leaks. Please use whatever method you can to take it out of the codebase.",
+        "short_description": "If the code leaks, the account is compromised",
+        "severity": "low",
+        "is_vuln": false,
+        "confidence": "medium",
+    },
+    "dangerous_cookie": {
+        "information": "You should not handle cookies in your application. Please contact websec@mercadolibre.com if you wish to discuss the use case",
+        "short_description": "Cookie layer should be totally abstracted",
+        "severity": "low",
+        "is_vuln": false,
+        "confidence": "medium",
+    }
+}

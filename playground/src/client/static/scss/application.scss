@@ -1,0 +1,109 @@
+.App {
+  text-align: center;
+}
+
+.PageNotFound {
+  text-align: center;
+}
+
+.codeViewer {
+  text-align: left; 
+  border: 1px solid grey;
+}
+
+.logo {
+  height: 60px;
+  padding: 0px 20px 0px 20px;
+  float: left;
+}
+
+.App-logo {
+  // animation: App-logo-spin infinite 20s linear;
+  height: 10px;
+}
+
+.App-header {
+  background-color: #8d675b;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.float-left {
+  float: left;  
+}
+
+.float-right {
+  float: right;  
+}
+
+.padding{
+  padding: 20px;
+}
+
+.select {
+  width: 350px;
+  padding: 12px 20px 20px 50px;
+}
+
+.send-button {
+  padding: 20px 20px 20px 20px;
+}
+
+.about-button {
+  padding: 20px 20px 20px 30px;
+}
+
+.output {
+  background-color: #273A40; // #162028; 
+  text-align: left;
+  padding: 20px;
+  min-height: 300px;
+  color: #C2CAC0;
+}
+
+.data { 
+  white-space: pre; 
+}
+
+.legend-padding{
+  padding: 30px 0px 0px 0px;
+}
+
+.legend-padding ul li {
+  float: right;
+  padding: 20px;
+  list-style-type: none;
+}
+
+.result-code {
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.CodeMirror pre {
+  z-index: 0;
+}

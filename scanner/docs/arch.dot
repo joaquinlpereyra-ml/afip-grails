@@ -1,0 +1,45 @@
+strict digraph Architechture {
+    rankdir="LR";
+    subgraph cluster_server {
+        label="Server"
+        AFIP;
+    }
+    subgraph cluster_main {
+        label="Main steps";
+        "Class Visitor"; 
+        "Method Canonizator";
+        "Getter Visitor"; 
+        "Variable Creator";
+        "Taint Manager"; 
+        "Detector Manager";
+    }
+    subgraph cluster_detectors {
+        label="Detectors "
+        detector;
+    }
+    subgraph cluster_vulns {
+        label="Vulns"
+        vuln;
+    }
+    AFIP->Analyzer;
+    Analyzer->"Class Visitor";
+    Analyzer->"Method Canonizator";
+    Analyzer->"Getter Visitor";
+    Analyzer->"Variable Creator";
+    Analyzer->"Taint Manager"
+    Analyzer->"Detector Manager";
+    "Getter Visitor"->Variable[color="green",penwidth=1.5];
+    "Variable Creator"->Variable[color="green",penwidth=1.5];
+    Scopes->Scope;
+    Variable->Scope;
+    Scope->Variable;
+    "Taint Manager"->Variable[color="red",penwidth=1.5];
+    "Detector Manager"->Variable[color="blue",penwidth=1.5];
+    "Detector Manager"->detector;
+    detector->vuln[color="green",penwidth=1.5];
+    Analyzer->Scopes;
+    vuln->Analyzer;
+
+    {rank=same; Analyzer detector}
+    {rank=same; Scope Variable}
+}

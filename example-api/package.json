@@ -1,0 +1,17 @@
+{
+  "name": "afip-example-api",
+  "version": "1.0.0",
+  "description": "AFIP API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": {
+    "name": "Philippe Clavier",
+    "email": "pclavier92@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
