@@ -25,8 +25,7 @@ Then you can run the Scanner, the Playground and the example API with:
 docker-compose up -d
 ```
 
-Access to the API on http://localhost:8000
-Access to the Playground on http://localhost:8080
+Access to the API on _http://localhost:8000_. Access to the Playground on _http://localhost:8080_
 
 ## AFIP Playground
 
@@ -42,7 +41,10 @@ The AFIP [Playground](playground/README.md) is a small frontend where you can te
 
 ## Example API
 
-The API is a simple server to exemplify how should the interface between the Scanner and the API be. The API can be reached at http://localhost:8000 and the Scanner is configured to make requests too this endpoint. To request a scan a POST request must be sent to the API specifying the Github repository to be scanned and the tags you wish to scan. If the project has no tags, you may send a branch name like 'master' and it should scan the last commit of that branch.
+**Warning!** The example API is NOT INTENDED FOR USAGE IN PRODUCTIVE SYSTEMS. It is though extensively
+documented so feel free to base your design on it. 
+
+The API is a simple server to exemplify how should the interface between the Scanner and the API be. The API can be reached at _http://localhost:8000_ and the Scanner is configured to make requests too this endpoint. To request a scan a POST request must be sent to the API specifying the Github repository to be scanned and the tags you wish to scan. If the project has no tags, you may send a branch name like 'master' and it should scan the last commit of that branch.
 
 ```json
 {
@@ -58,6 +60,7 @@ The API is a simple server to exemplify how should the interface between the Sca
 
 The API will respond to this message with the scan ID and the results for the scan can be accessed at the path */scans/results/:id* using the received ID. If no ID is specified the response will contain the results for all scans done.
 
+### Example usage
 Interactions with the API look something like this:
 ```bash
 $ curl -X POST http://localhost:8000/scans/queue -d '{"data": {"type": "scanRequest", "attributes": {"repositoryURL": "https://github.com/dima767/grails-crowd/", "tags": ["v1.3.3"] } } }' -H 'Content-Type: application/json'
