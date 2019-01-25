@@ -15,11 +15,11 @@ Then the server will just return a JSON with all the vulnerabilities the detecto
 
 The next graph represents the **Project** structure after being created.
 
-AFIP Groovy Project Structure
+[AFIP Groovy Project Structure](proyect_structure.png)
 
 This is the dependency graph for the main AFIP Components
 
-AFIP Groovy Dependency
+[AFIP Groovy Dependency](dependency.png)
 
 From source to vuln: a detailed explanation
 =======================
@@ -105,8 +105,7 @@ It is also a precondition that there's only *one* valid (where valid means with 
 folder inside the whole repository. If any of these precondition are not met, AFIP will raise a *NotAGrailsRepository* error.
 
 We know exactly where certain important files are located, like the *Config.groovy* file and all the controllers and
-views. This will be used by the **MethodAnalyzer** and the visitors.
-
+views. This will be used by the **MethodAnalyzer** and the visitors.  
 ###  GSPFile
 
 The **GSPFile** is mainly used in the manipulation of *.gsp* view files later on the process to actually
@@ -120,7 +119,8 @@ It can analyze a **MethodScope** to classify it (either as a *Cleaner*, a *Sink*
 This process goes on and on stacking methods till it finishes analyzing a method when the method does not call any other method. Then the analyzer will pop the previous method from the stack and it will continue the paused analysis. In the process of analyzing methods it could encounter a call for a method currently in the stack. In that case it will throw an **CircularAnalysisException** and mark the method as analyzed.
 
 The next figure show the process of classifying an imaginary "fooMethod" which in turn calls another method named "barMethod" that does not make method calls
-AFIP Groovy High Level Analysis Process
+
+[AFIP Groovy High Level Analysis Process](analyzer.png)
 
 After all the important methods (usually the methods in the controllers), it starts looking for vulns with the **DetectorManager**. The whole process is managed the **DetectorManager**.
 
