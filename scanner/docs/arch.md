@@ -15,11 +15,11 @@ Then the server will just return a JSON with all the vulnerabilities the detecto
 
 The next graph represents the **Project** structure after being created.
 
-[AFIP Groovy Project Structure](proyect_structure.png)
+![AFIP Groovy Project Structure](proyect_structure.png)
 
 This is the dependency graph for the main AFIP Components
 
-[AFIP Groovy Dependency](dependency.png)
+![AFIP Groovy Dependency](dependency.png)
 
 From source to vuln: a detailed explanation
 =======================
@@ -120,7 +120,7 @@ This process goes on and on stacking methods till it finishes analyzing a method
 
 The next figure show the process of classifying an imaginary "fooMethod" which in turn calls another method named "barMethod" that does not make method calls
 
-[AFIP Groovy High Level Analysis Process](analyzer.png)
+![AFIP Groovy High Level Analysis Process](analyzer.png)
 
 After all the important methods (usually the methods in the controllers), it starts looking for vulns with the **DetectorManager**. The whole process is managed the **DetectorManager**.
 
