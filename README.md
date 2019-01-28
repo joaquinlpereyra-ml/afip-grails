@@ -155,7 +155,7 @@ Also worth mentioning are Jonatan Cisneros and Alejandro Iacobelli for their inn
 >_Patito did a lot of late-stage work on the project and left the team to follow a dream just before it went open source. We love you Patito! Good luck in your adventures._
 
 ## Questions
-You may post an issue here or send an email to [Joaquin](joaquin.pereyra@mercadolibre.com) or [Philippe](philippe.clavier@mercadolibre.com)
+You may post an issue here or send an email to <joaquin.pereyra@mercadolibre.com> or <philippe.clavier@mercadolibre.com>
 
 ## License
 
