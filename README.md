@@ -6,28 +6,65 @@
 
 Detect vulnerabilities with this SAST for Groovy!
 
+* [The project](#The-project)
+  * [Features](#Features)
+* [Usage](#Usage)
+* [Components](#Components)
+  * [Scanner](#Scanner)
+  * [Playground](#Playground)
+  * [Example API](#Example-API)
+* [Technical details](#Technical-details)
+* [Credits](#Credits)
+* [Questions](#Questions)
+* [License](License)
+
 If you need to know the details of how this works on a technical level, please refer to [this project docs](scanner/docs/arch.md).
 
+# The project
+The **AFIP project** is a collection of SAST tools and APIs. This represent the open source part of the project:
+the [Grails scanner](#Scanner) checks for [several vulnerabilities](scanner/README.md) in Grails projects
+and produces a JSON request to the [API](#Example-API) with its results.
 
-## Docker image
+The [Playground](#Playground) is a small frontend which also communicates with the Grails scanner and is able to send just snippets of code instead of full-fledged Grails repositories. It is intended as a quick preview of what the Scanner can accomplish.
 
-You first need the build the docker images. Before building, complete the *env.list*  with your own github keys if you wish to scan private repositories.
+We also think it is a nice example of a static analysis tool using taint analysis with inter-method and inter-file taint support. You can use it as inspiration. This is why we provide a **VERY** [extensive documentation](scanner/docs/arch.md) on how the scanner works internally.
+
+## Features
+
+* Fully dockerized installation
+* Taint analysis
+  * Inter-method analysis
+  * Inter-file analysis
+* Regex analysis for simple vulnerabilities
+* Script to partly automate adding new vulnerabilities _detectors_.
+* Example API to easily add your own custom business logic, for example, persistence, false positive support or
+integration to other services.
+
+
+## Usage
+
+You first need the build the docker images. Before building, complete the *env.list*  with your own
+github keys if you wish to scan private repositories.
 
 Then you may run:
 
 ```bash
-docker build -t afip-playground ./playground && docker build -t afip-example-api ./example-api && docker build -t afip-scanner ./scanner
+$ docker build -t afip-playground ./playground && docker build -t afip-example-api ./example-api && docker build -t afip-scanner ./scanner
 ```
 
 Then you can run the Scanner, the Playground and the example API with:
 
 ```bash
-docker-compose up -d
+$ docker-compose up -d
 ```
 
-Access to the API on _http://localhost:8000_. Access to the Playground on _http://localhost:8080_
+Access the API on _http://localhost:8000_. Access the Playground on _http://localhost:8080_
 
-## AFIP Playground
+We recommend starting on the [Playground](#Playground) to test AFIP.
+Then, you may read how to use the [Example API](#Example-API) to make the scanner do its job on a whole Grails repository.
+
+# Components
+## Playground
 
 The AFIP [Playground](playground/README.md) is a small frontend where you can test out snippets of code against several vulnerabilities.
 
@@ -35,16 +72,21 @@ The AFIP [Playground](playground/README.md) is a small frontend where you can te
 
 1. Select a vulnerability against which you want to test your code.
 
-2. Load a snippet of code you want to analyze. You can use the Example button to load an example snippet for the selected vulnerability.
+2. Load a snippet of code you want to analyze. You can use the Example button to load an example snippet for
+the selected vulnerability.
 
-3. Analyze the code and see the results obtained. Results are color coded: green means a previously dangerous variable has been cleaned, yellow indicates a tainted variable and red indicates a tainted variable which has reached a dangerous function (ie: a vulnerability.)
+3. Analyze the code and see the results obtained.
+
+Results are color coded: green means a previously dangerous variable has been cleaned, yellow indicates a tainted variable and red indicates a tainted variable which has reached a dangerous function (ie: a vulnerability.)
 
 ## Example API
 
 **Warning!** The example API is NOT INTENDED FOR USAGE IN PRODUCTIVE SYSTEMS. It is though extensively
-documented so feel free to base your design on it. 
+documented so feel free to base your design on it.
 
-The API is a simple server to exemplify how should the interface between the Scanner and the API be. The API can be reached at _http://localhost:8000_ and the Scanner is configured to make requests too this endpoint. To request a scan a POST request must be sent to the API specifying the Github repository to be scanned and the tags you wish to scan. If the project has no tags, you may send a branch name like 'master' and it should scan the last commit of that branch.
+The API is a simple server to exemplify how should the interface between the Scanner and the API be. The API can be reached at _http://localhost:8000_ and the Scanner is configured to make requests too this endpoint.
+
+To request a scan a POST request must be sent to the API specifying the Github repository to be scanned and the tags you wish to scan. If the project has no tags, you may send a branch name like 'master' and it should scan the last commit of that branch.
 
 ```json
 {
@@ -69,6 +111,7 @@ $ curl -X POST http://localhost:8000/scans/queue -d '{"data": {"type": "scanRequ
 $ curl -X GET http://localhost:8000/scans/results/8yecwoyab2c
 ```
 
+# Technical details
 ## Interface Scanner - API
 
 The AFIP Scanner requires an API from which it will request the scans to perform and then post the results to.
@@ -82,13 +125,15 @@ Finally, the Scanner will post the results back to the API whether it is the vul
 ## Create New Detectors
 
 We provide a Python 3 script *vuln_creator.py* that helps create new detectors, which is accompanied by a list of vulnerabilities in the file *vulns.json*. To add a new detector fill in the *vulns.json* file with the new vulnerablity you want to create and run the script *vuln_creator.py*.
+
 This will create three template files in the AFIP Scanner. For a *NewVuln* the files created will be:
 
-'''
+```
 scanner/src/groovy/afip/detectors/NewVulnDetector.groovy
 scanner/src/groovy/afip/vulns/NewVuln.groovy
 scanner/src/tests/NewVulnTests.groovy
-'''
+``````
+
 To run it:
 ```bash
 python3 vuln_creator.py
