@@ -4,7 +4,7 @@
   <img height="300" src="logo.png">
 </p>
 
-Detect vulnerabilities with this SAST for Groovy!
+Detect vulnerabilities with this SAST scanner for Groovy!
 
 * [The project](#The-project)
   * [Features](#Features)
